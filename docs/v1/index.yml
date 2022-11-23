@@ -8,7 +8,7 @@ info:
     - **Specs:** https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#pathsObject
     - **Basic Structure:** https://swagger.io/docs/specification/basic-structure/
     - **Tutorial:** https://support.smartbear.com/swaggerhub/docs/tutorials/openapi-3-tutorial.html
-    
+
     # Cross-Origin Resource Sharing
     This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with  [W3C spec](https://www.w3.org/TR/cors/).
     And that allows cross-domain communication from the browser.
@@ -49,6 +49,8 @@ paths:
     $ref: './inventory/transfer-items/receive-items-export.yml'
   /inventory/usages:
     $ref: ./inventory/inventory-usage/inventory_usages.yaml
+  /inventory/usages/{id}:
+    $ref: ./inventory/inventory-usage/inventory_usages_id.yaml
   /inventory/usages/{id}/histories:
     $ref: ./inventory/inventory-usage/inventory_usages_id_histories.yaml
   /inventory/usages/{id}/approve:

@@ -1,36 +1,20 @@
 openapi: 3.0.3
 info:
   title: Point API Docs
-  description: >
+  description: |
     # Introduction
+    This API is documented in **OpenAPI format**, You can find more information :
 
-    This API is documented in **OpenAPI format**, You can find more information
-    :
-
-
-    - **Specs:**
-    https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#pathsObject
-
-    - **Basic Structure:**
-    https://swagger.io/docs/specification/basic-structure/
-
-    - **Tutorial:**
-    https://support.smartbear.com/swaggerhub/docs/tutorials/openapi-3-tutorial.html
-
+    - **Specs:** https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#pathsObject
+    - **Basic Structure:** https://swagger.io/docs/specification/basic-structure/
+    - **Tutorial:** https://support.smartbear.com/swaggerhub/docs/tutorials/openapi-3-tutorial.html
 
     # Cross-Origin Resource Sharing
-
-    This API features Cross-Origin Resource Sharing (CORS) implemented in
-    compliance with  [W3C spec](https://www.w3.org/TR/cors/).
-
+    This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with  [W3C spec](https://www.w3.org/TR/cors/).
     And that allows cross-domain communication from the browser.
-
-    All responses have a wildcard same-origin which makes them completely public
-    and accessible to everyone, including any code on any site.
-
+    All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.
 
     # Authentication
-
     Ex-Module offers two forms of authentication:
       - Local Authentication
       - Json Web Token
@@ -47,16 +31,7 @@ servers:
     description: Production Server
 tags:
   - name: Admin
-    description: >-
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the
-      1500s, when an unknown printer took a galley of type and scrambled it to
-      make a type specimen book. It has survived not only five centuries, but
-      also the leap into electronic typesetting, remaining essentially
-      unchanged. It was popularised in the 1960s with the release of Letraset
-      sheets containing Lorem Ipsum passages, and more recently with desktop
-      publishing software like Aldus PageMaker including versions of Lorem
-      Ipsum.
+    description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 paths:
   /admins:
     get:
@@ -797,8 +772,7 @@ paths:
           description: multi value, divide with coma (;)
           schema:
             type: string
-            example: >-
-              warehouse;to_warehouse;items.item;form.createdBy;form.requestApprovalTo;form.branch
+            example: warehouse;to_warehouse;items.item;form.createdBy;form.requestApprovalTo;form.branch
       responses:
         '200':
           description: OK
@@ -1551,8 +1525,7 @@ paths:
           description: multi value, divide with coma (,)
           schema:
             type: string
-            example: >-
-              form,items.item,from_warehouse,warehouse,transfer_item.form,transfer_item.items
+            example: form,items.item,from_warehouse,warehouse,transfer_item.form,transfer_item.items
         - name: page
           in: query
           description: Data page
@@ -2335,8 +2308,7 @@ paths:
           description: multi value, divide with coma (;)
           schema:
             type: string
-            example: >-
-              from_warehouse;warehouse;items.item;form.createdBy;form.requestApprovalTo;form.branch;transfer_item.form;transfer_item.items;
+            example: from_warehouse;warehouse;items.item;form.createdBy;form.requestApprovalTo;form.branch;transfer_item.form;transfer_item.items;
       responses:
         '200':
           description: OK
@@ -3090,7 +3062,7 @@ paths:
                   type: array
                   items:
                     type: object
-                    requred:
+                    required:
                       - item_id
                       - chart_of_account_id
                       - quantity
@@ -3675,6 +3647,873 @@ paths:
                   per_page: '10'
                   to: 6
                   total: 6
+  /inventory/usages/{id}:
+    get:
+      tags:
+        - Inventory Usage
+      summary: inventory usage - show
+      parameters:
+        - name: with_archives
+          in: query
+          schema:
+            type: boolean
+          example: 'true'
+        - name: with_origin
+          in: query
+          schema:
+            type: boolean
+          example: 'true'
+        - name: includes
+          in: query
+          schema:
+            type: string
+          example: warehouse;items.account;items.item;items.allocation;form.createdBy;form.requestApprovalTo;form.requestCancellationTo;employee
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  warehouse_id:
+                    type: integer
+                  employee_id:
+                    type: integer
+                  form:
+                    $ref: '#/components/schemas/form'
+                  archives:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        warehouse_id:
+                          type: integer
+                        employee_id:
+                          type: integer
+                        form:
+                          $ref: '#/components/schemas/form'
+                  origin:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      warehouse_id:
+                        type: integer
+                      employee_id:
+                        type: integer
+                      form:
+                        $ref: '#/components/schemas/form'
+                  warehouse:
+                    $ref: '#/components/schemas/warehouse'
+                  items:
+                    $ref: '#/components/schemas/inventory-usage-items'
+                  employee:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      code:
+                        type: string
+                      tax_identification_number:
+                        type: string
+                      name:
+                        type: string
+                      address:
+                        type: string
+                      city:
+                        type: string
+                      state:
+                        type: string
+                      country:
+                        type: string
+                      zip_code:
+                        type: integer
+                      latitude:
+                        type: string
+                      longitude:
+                        type: string
+                      phone:
+                        type: string
+                      phone_cc:
+                        type: string
+                      email:
+                        type: string
+                      bpjs:
+                        type: string
+                      resign_date:
+                        type: string
+                      personal_identity:
+                        type: string
+                      last_education:
+                        type: string
+                      birth_date:
+                        type: string
+                      birth_place:
+                        type: string
+                      employee_gender_id:
+                        type: integer
+                      employee_marital_status_id:
+                        type: integer
+                      married_with:
+                        type: string
+                      employee_religion_id:
+                        type: integer
+                      employee_group_id:
+                        type: integer
+                      employee_status_id:
+                        type: integer
+                      employee_job_location_id:
+                        type: integer
+                      join_date:
+                        type: string
+                      job_title:
+                        type: string
+                      kpi_template_id:
+                        type: integer
+                      notes:
+                        type: string
+                      daily_transport_allowance:
+                        type: string
+                      functional_allowance:
+                        type: string
+                      communication_allowance:
+                        type: string
+                      branch_id:
+                        type: integer
+                      user_id:
+                        type: integer
+                      created_by:
+                        type: string
+                      updated_by:
+                        type: string
+                      archived_by:
+                        type: string
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                      archived_at:
+                        type: string
+                      label:
+                        type: string
+              example:
+                data:
+                  id: 169
+                  warehouse_id: 1
+                  employee_id: 1
+                  archives:
+                    - id: 168
+                      warehouse_id: 1
+                      employee_id: 1
+                      form:
+                        id: 112
+                        branch_id: 1
+                        date: '2022-11-09 13:10:05'
+                        number: null
+                        edited_number: IU22110028
+                        edited_notes: ''
+                        notes: null
+                        created_by: 1
+                        updated_by: 1
+                        done: 0
+                        increment: 28
+                        increment_group: 202211
+                        formable_id: 168
+                        formable_type: InventoryUsage
+                        request_approval_to: 1
+                        approval_by: null
+                        approval_at: null
+                        approval_reason: null
+                        approval_status: 0
+                        request_cancellation_to: null
+                        request_cancellation_by: null
+                        request_cancellation_at: null
+                        request_cancellation_reason: null
+                        cancellation_approval_at: null
+                        cancellation_approval_by: null
+                        cancellation_approval_reason: null
+                        cancellation_status: null
+                        created_at: '2022-11-09 13:11:16'
+                        updated_at: '2022-11-21 06:04:32'
+                        request_close_to: null
+                        request_close_by: null
+                        request_close_at: null
+                        request_close_reason: null
+                        close_approval_at: null
+                        close_approval_by: null
+                        close_status: null
+                        request_approval_at: null
+                        close_approval_reason: null
+                  origin:
+                    id: 169
+                    warehouse_id: 1
+                    employee_id: 1
+                    form:
+                      id: 113
+                      branch_id: 1
+                      date: '2022-11-09 13:10:05'
+                      number: IU22110028
+                      edited_number: null
+                      edited_notes: null
+                      notes: null
+                      created_by: 1
+                      updated_by: 1
+                      done: 0
+                      increment: 28
+                      increment_group: 202211
+                      formable_id: 169
+                      formable_type: InventoryUsage
+                      request_approval_to: 1
+                      approval_by: null
+                      approval_at: null
+                      approval_reason: null
+                      approval_status: 0
+                      request_cancellation_to: null
+                      request_cancellation_by: null
+                      request_cancellation_at: null
+                      request_cancellation_reason: null
+                      cancellation_approval_at: null
+                      cancellation_approval_by: null
+                      cancellation_approval_reason: null
+                      cancellation_status: null
+                      created_at: '2022-11-21 06:04:32'
+                      updated_at: '2022-11-21 06:04:32'
+                      request_close_to: null
+                      request_close_by: null
+                      request_close_at: null
+                      request_close_reason: null
+                      close_approval_at: null
+                      close_approval_by: null
+                      close_status: null
+                      request_approval_at: null
+                      close_approval_reason: null
+                  warehouse:
+                    id: 1
+                    code: null
+                    name: CENTRAL WAREHOUSE
+                    address: null
+                    phone: null
+                    notes: null
+                    branch_id: 1
+                    created_by: null
+                    updated_by: null
+                    archived_by: null
+                    created_at: '2022-09-26 08:14:40'
+                    updated_at: '2022-09-26 08:14:40'
+                    archived_at: null
+                    label: CENTRAL WAREHOUSE
+                  items:
+                    - id: 97
+                      inventory_usage_id: 169
+                      item_id: 8
+                      allocation_id: 1
+                      chart_of_account_id: 124
+                      quantity: 5
+                      expiry_date: '2022-10-18 00:00:00'
+                      production_number: '12312312'
+                      unit: PCS
+                      converter: 1
+                      notes: null
+                      account:
+                        id: 124
+                        type_id: 31
+                        group_id: 2
+                        is_sub_ledger: 0
+                        sub_ledger: ''
+                        position: DEBIT
+                        is_locked: 0
+                        cash_flow: ''
+                        cash_flow_position: ''
+                        number: '51108'
+                        name: OFFICE ADMINISTRATION EXPENSE
+                        alias: POS & DOKUMEN
+                        created_by: null
+                        updated_by: null
+                        archived_by: null
+                        created_at: '2022-09-26 08:18:26'
+                        updated_at: '2022-09-26 08:18:26'
+                        archived_at: null
+                        label: '[51108] POS & DOKUMEN'
+                      item:
+                        id: 8
+                        chart_of_account_id: 14
+                        code: BR1666
+                        barcode: null
+                        name: Kopi ku
+                        size: null
+                        color: null
+                        weight: null
+                        notes: null
+                        taxable: 1
+                        require_production_number: 1
+                        require_expiry_date: 1
+                        stock: 114
+                        stock_reminder: 0
+                        unit_default: 9
+                        unit_default_purchase: 9
+                        unit_default_sales: 9
+                        created_by: 1
+                        updated_by: 1
+                        archived_by: null
+                        created_at: '2022-10-18 09:35:58'
+                        updated_at: '2022-11-02 16:01:36'
+                        archived_at: null
+                        label: '[BR1666] Kopi ku'
+                      allocation:
+                        id: 1
+                        code: null
+                        name: promosi
+                        notes: null
+                        branch_id: null
+                        created_by: 1
+                        updated_by: 1
+                        archived_by: null
+                        created_at: '2022-09-27 08:53:50'
+                        updated_at: '2022-09-27 08:53:50'
+                        archived_at: null
+                        label: promosi
+                    - id: 98
+                      inventory_usage_id: 169
+                      item_id: 8
+                      allocation_id: 1
+                      chart_of_account_id: 124
+                      quantity: 1
+                      expiry_date: '2022-10-18 00:00:00'
+                      production_number: '9893867'
+                      unit: PCS
+                      converter: 1
+                      notes: null
+                      account:
+                        id: 124
+                        type_id: 31
+                        group_id: 2
+                        is_sub_ledger: 0
+                        sub_ledger: ''
+                        position: DEBIT
+                        is_locked: 0
+                        cash_flow: ''
+                        cash_flow_position: ''
+                        number: '51108'
+                        name: OFFICE ADMINISTRATION EXPENSE
+                        alias: POS & DOKUMEN
+                        created_by: null
+                        updated_by: null
+                        archived_by: null
+                        created_at: '2022-09-26 08:18:26'
+                        updated_at: '2022-09-26 08:18:26'
+                        archived_at: null
+                        label: '[51108] POS & DOKUMEN'
+                      item:
+                        id: 8
+                        chart_of_account_id: 14
+                        code: BR1666
+                        barcode: null
+                        name: Kopi ku
+                        size: null
+                        color: null
+                        weight: null
+                        notes: null
+                        taxable: 1
+                        require_production_number: 1
+                        require_expiry_date: 1
+                        stock: 114
+                        stock_reminder: 0
+                        unit_default: 9
+                        unit_default_purchase: 9
+                        unit_default_sales: 9
+                        created_by: 1
+                        updated_by: 1
+                        archived_by: null
+                        created_at: '2022-10-18 09:35:58'
+                        updated_at: '2022-11-02 16:01:36'
+                        archived_at: null
+                        label: '[BR1666] Kopi ku'
+                      allocation:
+                        id: 1
+                        code: null
+                        name: promosi
+                        notes: null
+                        branch_id: null
+                        created_by: 1
+                        updated_by: 1
+                        archived_by: null
+                        created_at: '2022-09-27 08:53:50'
+                        updated_at: '2022-09-27 08:53:50'
+                        archived_at: null
+                        label: promosi
+                  form:
+                    id: 113
+                    branch_id: 1
+                    date: '2022-11-09 13:10:05'
+                    number: IU22110028
+                    edited_number: null
+                    edited_notes: null
+                    notes: null
+                    created_by:
+                      id: 1
+                      name: admin
+                      first_name: admin
+                      last_name: admin
+                      address: null
+                      phone: null
+                      email: rockydocky007@yahoo.com
+                      created_at: '2022-09-26 08:14:36'
+                      updated_at: '2022-09-26 08:14:36'
+                      branch_id: null
+                      warehouse_id: null
+                      full_name: admin admin
+                    updated_by: 1
+                    done: 0
+                    increment: 28
+                    increment_group: 202211
+                    formable_id: 169
+                    formable_type: InventoryUsage
+                    request_approval_to:
+                      id: 1
+                      name: admin
+                      first_name: admin
+                      last_name: admin
+                      address: null
+                      phone: null
+                      email: rockydocky007@yahoo.com
+                      created_at: '2022-09-26 08:14:36'
+                      updated_at: '2022-09-26 08:14:36'
+                      branch_id: null
+                      warehouse_id: null
+                      full_name: admin admin
+                    approval_by: null
+                    approval_at: null
+                    approval_reason: null
+                    approval_status: 0
+                    request_cancellation_to: null
+                    request_cancellation_by: null
+                    request_cancellation_at: null
+                    request_cancellation_reason: null
+                    cancellation_approval_at: null
+                    cancellation_approval_by: null
+                    cancellation_approval_reason: null
+                    cancellation_status: null
+                    created_at: '2022-11-21 06:04:32'
+                    updated_at: '2022-11-21 06:04:32'
+                    request_close_to: null
+                    request_close_by: null
+                    request_close_at: null
+                    request_close_reason: null
+                    close_approval_at: null
+                    close_approval_by: null
+                    close_status: null
+                    request_approval_at: null
+                    close_approval_reason: null
+                  employee:
+                    id: 1
+                    code: null
+                    tax_identification_number: '3515111422123'
+                    name: Jhon Doe
+                    address: null
+                    city: null
+                    state: null
+                    country: null
+                    zip_code: null
+                    latitude: null
+                    longitude: null
+                    phone: null
+                    phone_cc: null
+                    email: null
+                    bpjs: '3515111422123'
+                    resign_date: null
+                    personal_identity: '3515111422123'
+                    last_education: null
+                    birth_date: null
+                    birth_place: null
+                    employee_gender_id: null
+                    employee_marital_status_id: null
+                    married_with: null
+                    employee_religion_id: null
+                    employee_group_id: null
+                    employee_status_id: null
+                    employee_job_location_id: null
+                    join_date: null
+                    job_title: null
+                    kpi_template_id: null
+                    notes: null
+                    daily_transport_allowance: 0
+                    functional_allowance: 0
+                    communication_allowance: 0
+                    branch_id: null
+                    user_id: null
+                    created_by: 1
+                    updated_by: 1
+                    archived_by: null
+                    created_at: '2022-09-27 08:52:24'
+                    updated_at: '2022-09-27 08:52:24'
+                    archived_at: null
+                    label: Jhon Doe
+    patch:
+      tags:
+        - Inventory Usage
+      summary: inventory usage - update
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 59
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - warehouse_id
+                - employee_id
+                - request_approval_to
+                - date
+                - items
+              properties:
+                originalData:
+                  $ref: ./components/requests/properties/inventory-usage-original-data.yaml
+                items:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - item_id
+                      - chart_of_account_id
+                      - quantity
+                      - unit
+                      - converter
+                      - allocation_id
+                    properties:
+                      $ref: ./components/requests/properties/inventory-usage-item.yaml
+                increment_group:
+                  type: string
+                date:
+                  type: string
+                warehouse_id:
+                  type: integer
+                warehouse_name:
+                  type: string
+                employee_id:
+                  type: integer
+                employee_name:
+                  type: string
+                request_approval_to:
+                  type: string
+                approver_name:
+                  type: string
+                approver_email:
+                  type: string
+                notes:
+                  type: string
+                errors:
+                  type: object
+                  properties:
+                    errors:
+                      type: object
+              example:
+                originalData:
+                  id: 169
+                  increment_group: '202211'
+                  date: '2022-11-21 06:04:08'
+                  warehouse_id: null
+                  warehouse_name: null
+                  employee_id: null
+                  employee_name: null
+                  request_approval_to: null
+                  approver_name: null
+                  approver_email: null
+                  notes: null
+                  items: []
+                id: 169
+                increment_group: '202211'
+                date: '2022-11-09 13:10:05'
+                warehouse_id: 1
+                warehouse_name: CENTRAL WAREHOUSE
+                employee_id: 1
+                employee_name: Jhon Doe
+                request_approval_to: 1
+                approver_name: admin admin
+                approver_email: rockydocky007@yahoo.com
+                items:
+                  - id: 96
+                    inventory_usage_id: 168
+                    item_id: 8
+                    allocation_id: 1
+                    chart_of_account_id: 124
+                    quantity: '6'
+                    expiry_date: '2022-10-18 00:00:00'
+                    production_number: '12312312'
+                    unit: PCS
+                    converter: 1
+                    notes: null
+                    account:
+                      id: 124
+                      type_id: 31
+                      group_id: 2
+                      is_sub_ledger: 0
+                      sub_ledger: ''
+                      position: DEBIT
+                      is_locked: 0
+                      cash_flow: ''
+                      cash_flow_position: ''
+                      number: '51108'
+                      name: OFFICE ADMINISTRATION EXPENSE
+                      alias: POS & DOKUMEN
+                      created_by: null
+                      updated_by: null
+                      archived_by: null
+                      created_at: '2022-09-26 08:18:26'
+                      updated_at: '2022-09-26 08:18:26'
+                      archived_at: null
+                      label: '[51108] POS & DOKUMEN'
+                    item:
+                      id: 8
+                      chart_of_account_id: 14
+                      code: BR1666
+                      barcode: null
+                      name: Kopi ku
+                      size: null
+                      color: null
+                      weight: null
+                      notes: null
+                      taxable: 1
+                      require_production_number: 1
+                      require_expiry_date: 1
+                      stock: 114
+                      stock_reminder: 0
+                      unit_default: 9
+                      unit_default_purchase: 9
+                      unit_default_sales: 9
+                      created_by: 1
+                      updated_by: 1
+                      archived_by: null
+                      created_at: '2022-10-18 09:35:58'
+                      updated_at: '2022-11-02 16:01:36'
+                      archived_at: null
+                      label: '[BR1666] Kopi ku'
+                      units:
+                        - id: 9
+                          label: PCS
+                          name: PCS
+                          converter: 1
+                          disabled: 0
+                          item_id: 8
+                          created_by: 1
+                          updated_by: 1
+                          created_at: '2022-10-18 09:35:58'
+                          updated_at: '2022-10-18 09:35:58'
+                      unit:
+                        id: 9
+                        label: PCS
+                        name: PCS
+                        converter: 1
+                        disabled: 0
+                        item_id: 8
+                        created_by: 1
+                        updated_by: 1
+                        created_at: '2022-10-18 09:35:58'
+                        updated_at: '2022-10-18 09:35:58'
+                      converter: 1
+                    allocation:
+                      id: 1
+                      code: null
+                      name: promosi
+                      notes: null
+                      branch_id: null
+                      created_by: 1
+                      updated_by: 1
+                      archived_by: null
+                      created_at: '2022-09-27 08:53:50'
+                      updated_at: '2022-09-27 08:53:50'
+                      archived_at: null
+                      label: promosi
+                    item_label: Kopi ku
+                    chart_of_account_name: OFFICE ADMINISTRATION EXPENSE
+                    allocation_name: promosi
+                    units:
+                      - id: 9
+                        label: PCS
+                        name: PCS
+                        converter: 1
+                        disabled: 0
+                        item_id: 8
+                        created_by: 1
+                        updated_by: 1
+                        created_at: '2022-10-18 09:35:58'
+                        updated_at: '2022-10-18 09:35:58'
+                    dna:
+                      - id: 13
+                        form_id: 51
+                        warehouse_id: 1
+                        item_id: 8
+                        quantity: '5'
+                        expiry_date: '2022-10-18 00:00:00'
+                        production_number: '12312312'
+                        need_recalculate: 0
+                        quantity_reference: '1200.000000000000000000000000000000'
+                        unit_reference: PCS
+                        converter_reference: '1.000000000000000000000000000000'
+                        is_posted: 0
+                        created_at: '2022-10-18 09:40:47'
+                        updated_at: '2022-10-18 09:40:47'
+                        remaining: 106
+                        unitRemaining: 106
+                        remainingInUnit: 106
+                      - id: 14
+                        form_id: 51
+                        warehouse_id: 1
+                        item_id: 8
+                        quantity: '1'
+                        expiry_date: '2022-10-18 00:00:00'
+                        production_number: '9893867'
+                        need_recalculate: 0
+                        quantity_reference: '32.000000000000000000000000000000'
+                        unit_reference: PCS
+                        converter_reference: '1.000000000000000000000000000000'
+                        is_posted: 0
+                        created_at: '2022-10-18 09:40:47'
+                        updated_at: '2022-10-18 09:40:47'
+                        remaining: 22
+                        unitRemaining: 22
+                        remainingInUnit: 22
+                    index: 0
+                    warehouse_id: 1
+                errors:
+                  errors: {}
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  warehouse_id:
+                    type: integer
+                  employee_id:
+                    type: integer
+                  form:
+                    $ref: '#/components/schemas/form'
+                  warehouse:
+                    $ref: '#/components/schemas/warehouse'
+                  items:
+                    $ref: '#/components/schemas/inventory-usage-items'
+              example:
+                data:
+                  warehouse_id: 1
+                  employee_id: 1
+                  id: 170
+                  warehouse:
+                    id: 1
+                    code: null
+                    name: CENTRAL WAREHOUSE
+                    address: null
+                    phone: null
+                    notes: null
+                    branch_id: 1
+                    created_by: null
+                    updated_by: null
+                    archived_by: null
+                    created_at: '2022-09-26 08:14:40'
+                    updated_at: '2022-09-26 08:14:40'
+                    archived_at: null
+                    label: CENTRAL WAREHOUSE
+                  form:
+                    id: 114
+                    branch_id: 1
+                    date: '2022-11-09 13:10:05'
+                    number: IU22110028
+                    edited_number: null
+                    edited_notes: null
+                    notes: null
+                    created_by: 1
+                    updated_by: 1
+                    done: 0
+                    increment: 28
+                    increment_group: 202211
+                    formable_id: 170
+                    formable_type: InventoryUsage
+                    request_approval_to: 1
+                    approval_by: null
+                    approval_at: null
+                    approval_reason: null
+                    approval_status: 0
+                    request_cancellation_to: null
+                    request_cancellation_by: null
+                    request_cancellation_at: null
+                    request_cancellation_reason: null
+                    cancellation_approval_at: null
+                    cancellation_approval_by: null
+                    cancellation_approval_reason: null
+                    cancellation_status: null
+                    created_at: '2022-11-21 06:37:15'
+                    updated_at: '2022-11-21 06:37:15'
+                    request_close_to: null
+                    request_close_by: null
+                    request_close_at: null
+                    request_close_reason: null
+                    close_approval_at: null
+                    close_approval_by: null
+                    close_status: null
+                    request_approval_at: null
+                    close_approval_reason: null
+                  items:
+                    - id: 99
+                      inventory_usage_id: 170
+                      item_id: 8
+                      allocation_id: 1
+                      chart_of_account_id: 124
+                      quantity: 5
+                      expiry_date: '2022-10-18 00:00:00'
+                      production_number: '12312312'
+                      unit: PCS
+                      converter: 1
+                      notes: null
+                      allocation:
+                        id: 1
+                        code: null
+                        name: promosi
+                        notes: null
+                        branch_id: null
+                        created_by: 1
+                        updated_by: 1
+                        archived_by: null
+                        created_at: '2022-09-27 08:53:50'
+                        updated_at: '2022-09-27 08:53:50'
+                        archived_at: null
+                        label: promosi
+                    - id: 100
+                      inventory_usage_id: 170
+                      item_id: 8
+                      allocation_id: 1
+                      chart_of_account_id: 124
+                      quantity: 1
+                      expiry_date: '2022-10-18 00:00:00'
+                      production_number: '9893867'
+                      unit: PCS
+                      converter: 1
+                      notes: null
+                      allocation:
+                        id: 1
+                        code: null
+                        name: promosi
+                        notes: null
+                        branch_id: null
+                        created_by: 1
+                        updated_by: 1
+                        archived_by: null
+                        created_at: '2022-09-27 08:53:50'
+                        updated_at: '2022-09-27 08:53:50'
+                        archived_at: null
+                        label: promosi
   /inventory/usages/{id}/histories:
     get:
       tags:
@@ -3816,18 +4655,15 @@ paths:
                       warehouse_id: null
                       full_name: admin admin
                 links:
-                  first: >-
-                    https://project-cendekia.site/api/v1/inventory/usages/43/histories?page=1
-                  last: >-
-                    https://project-cendekia.site/api/v1/inventory/usages/43/histories?page=1
+                  first: https://project-cendekia.site/api/v1/inventory/usages/43/histories?page=1
+                  last: https://project-cendekia.site/api/v1/inventory/usages/43/histories?page=1
                   prev: null
                   next: null
                 meta:
                   current_page: 1
                   from: 1
                   last_page: 1
-                  path: >-
-                    https://project-cendekia.site/api/v1/inventory/usages/43/histories
+                  path: https://project-cendekia.site/api/v1/inventory/usages/43/histories
                   per_page: '10'
                   to: 2
                   total: 2
@@ -7499,9 +8335,7 @@ paths:
                         28491 Morissette Drives Apt. 364
                         Port Juwan, LA 19032
                       phone: '+5993089919718'
-                      notes: >-
-                        Perferendis ipsam omnis rerum amet ex maiores animi. Ad
-                        rerum et ut rerum. Natus expedita voluptatem optio ipsa.
+                      notes: Perferendis ipsam omnis rerum amet ex maiores animi. Ad rerum et ut rerum. Natus expedita voluptatem optio ipsa.
                       branch_id: 2
                       created_by: null
                       updated_by: null
@@ -7598,13 +8432,10 @@ paths:
                           label: '[B-1282192] Gelas'
                         allocation: null
                 links:
-                  first: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-orders?page=1
-                  last: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-orders?page=4
+                  first: https://project-cendekia.site/api/v1/sales/delivery-orders?page=1
+                  last: https://project-cendekia.site/api/v1/sales/delivery-orders?page=4
                   prev: null
-                  next: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-orders?page=2
+                  next: https://project-cendekia.site/api/v1/sales/delivery-orders?page=2
                 meta:
                   current_page: 1
                   from: 1
@@ -8989,9 +9820,7 @@ paths:
                         28491 Morissette Drives Apt. 364
                         Port Juwan, LA 19032
                       phone: '+5993089919718'
-                      notes: >-
-                        Perferendis ipsam omnis rerum amet ex maiores animi. Ad
-                        rerum et ut rerum. Natus expedita voluptatem optio ipsa.
+                      notes: Perferendis ipsam omnis rerum amet ex maiores animi. Ad rerum et ut rerum. Natus expedita voluptatem optio ipsa.
                       branch_id: 2
                       created_by: null
                       updated_by: null
@@ -9045,18 +9874,15 @@ paths:
                           label: '[B-1202] Case'
                         allocation: null
                 links:
-                  first: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-orders/approval?page=1
-                  last: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-orders/approval?page=1
+                  first: https://project-cendekia.site/api/v1/sales/delivery-orders/approval?page=1
+                  last: https://project-cendekia.site/api/v1/sales/delivery-orders/approval?page=1
                   prev: null
                   next: null
                 meta:
                   current_page: 1
                   from: 1
                   last_page: 1
-                  path: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-orders/approval
+                  path: https://project-cendekia.site/api/v1/sales/delivery-orders/approval
                   per_page: '10'
                   to: 1
                   total: 1
@@ -9084,8 +9910,7 @@ paths:
           in: query
           schema:
             type: string
-          example: >-
-            customer;warehouse;items.item;items.allocation;salesOrder.form;form.createdBy;form.requestApprovalTo;form.branch
+          example: customer;warehouse;items.item;items.allocation;salesOrder.form;form.createdBy;form.requestApprovalTo;form.branch
       responses:
         '200':
           description: OK
@@ -9224,9 +10049,7 @@ paths:
                       28491 Morissette Drives Apt. 364
                       Port Juwan, LA 19032
                     phone: '+5993089919718'
-                    notes: >-
-                      Perferendis ipsam omnis rerum amet ex maiores animi. Ad
-                      rerum et ut rerum. Natus expedita voluptatem optio ipsa.
+                    notes: Perferendis ipsam omnis rerum amet ex maiores animi. Ad rerum et ut rerum. Natus expedita voluptatem optio ipsa.
                     branch_id: 2
                     created_by: null
                     updated_by: null
@@ -10293,18 +11116,15 @@ paths:
                       warehouse_id: null
                       full_name: admin admin
                 links:
-                  first: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-orders/66/histories?page=1
-                  last: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-orders/66/histories?page=1
+                  first: https://project-cendekia.site/api/v1/sales/delivery-orders/66/histories?page=1
+                  last: https://project-cendekia.site/api/v1/sales/delivery-orders/66/histories?page=1
                   prev: null
                   next: null
                 meta:
                   current_page: 1
                   from: 1
                   last_page: 1
-                  path: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-orders/66/histories
+                  path: https://project-cendekia.site/api/v1/sales/delivery-orders/66/histories
                   per_page: '10'
                   to: 2
                   total: 2
@@ -12687,8 +13507,7 @@ paths:
           in: query
           schema:
             type: string
-          example: >-
-            customer;warehouse;items.item;items.allocation;form.createdBy;form.requestApprovalTo;form.branch
+          example: customer;warehouse;items.item;items.allocation;form.createdBy;form.requestApprovalTo;form.branch
       responses:
         '200':
           description: OK
@@ -14171,18 +14990,15 @@ paths:
                       warehouse_id: null
                       full_name: admin admin
                 links:
-                  first: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-notes/66/histories?page=1
-                  last: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-notes/66/histories?page=1
+                  first: https://project-cendekia.site/api/v1/sales/delivery-notes/66/histories?page=1
+                  last: https://project-cendekia.site/api/v1/sales/delivery-notes/66/histories?page=1
                   prev: null
                   next: null
                 meta:
                   current_page: 1
                   from: 1
                   last_page: 1
-                  path: >-
-                    https://project-cendekia.site/api/v1/sales/delivery-notes/66/histories
+                  path: https://project-cendekia.site/api/v1/sales/delivery-notes/66/histories
                   per_page: '10'
                   to: 2
                   total: 2
@@ -15050,8 +15866,7 @@ paths:
           description: multi value, divide with coma (;)
           schema:
             type: string
-            example: >-
-              items.chart_of_account;items.form;items.masterable;form.createdBy;form.requestApprovalTo;form.branch;
+            example: items.chart_of_account;items.form;items.masterable;form.createdBy;form.requestApprovalTo;form.branch;
       responses:
         '200':
           description: OK
@@ -15789,8 +16604,7 @@ paths:
           in: query
           schema:
             type: string
-          example: >-
-            form;customer;details;details.referenceable;details.referenceable.form
+          example: form;customer;details;details.referenceable;details.referenceable.form
         - name: page
           in: query
           schema:
@@ -16338,8 +17152,7 @@ paths:
           in: query
           schema:
             type: string
-          example: >-
-            form;customer;details;details.chartOfAccount;details.chartOfAccount.type;details.allocation;form.createdBy;form.requestApprovalTo;form.branch
+          example: form;customer;details;details.chartOfAccount;details.chartOfAccount.type;details.allocation;form.createdBy;form.requestApprovalTo;form.branch
       responses:
         '200':
           description: OK
@@ -16580,21 +17393,25 @@ paths:
                     type: object
                     properties:
                       date:
-                        type: string
+                        type: date
                       chart_of_account_id:
                         type: integer
                       chart_of_account_name:
                         type: string
-                      available:
-                        type: integer
                       amount:
                         type: integer
                       allocation_id:
                         type: integer
                       allocation_name:
                         type: string
-                      referenceable_form_date:
+                      notes:
                         type: string
+                      is_debit:
+                        type: integer
+                      available:
+                        type: integer
+                      referenceable_form_date:
+                        type: date
                       referenceable_form_number:
                         type: string
                       referenceable_form_notes:
@@ -16616,9 +17433,9 @@ paths:
                 increment_group:
                   type: string
                 date:
-                  type: string
+                  type: date
                 due_date:
-                  type: string
+                  type: date
                 payment_type:
                   type: string
                 request_approval_to:
@@ -16924,18 +17741,15 @@ paths:
                       warehouse_id: 1
                       full_name: admin admin
               links:
-                first: >-
-                  http://example.com/api/v1/sales/payment-collection/91/histories?page=1
-                last: >-
-                  http://example.com/api/v1/sales/payment-collection/91/histories?page=1
+                first: http://example.com/api/v1/sales/payment-collection/91/histories?page=1
+                last: http://example.com/api/v1/sales/payment-collection/91/histories?page=1
                 prev: null
                 next: null
               meta:
                 current_page: 1
                 from: 1
                 last_page: 1
-                path: >-
-                  http://example.com/api/v1/sales/payment-collection/91/histories
+                path: http://example.com/api/v1/sales/payment-collection/91/histories
                 per_page: 10
                 to: 1
                 total: 1
@@ -18286,8 +19100,7 @@ paths:
           in: query
           schema:
             type: string
-          example: >-
-            customer;items.item;items.allocation;items.salesInvoiceItem;salesInvoice.form;form.createdBy;form.requestApprovalTo;form.branch
+          example: customer;items.item;items.allocation;items.salesInvoiceItem;salesInvoice.form;form.createdBy;form.requestApprovalTo;form.branch
       responses:
         '200':
           description: OK

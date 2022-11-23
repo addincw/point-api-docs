@@ -14,13 +14,13 @@ post:
             - items
           properties:
             originalData:
-              $ref: './components/requests/properties/inventory-usage-original-data.yaml'
-            $ref: './components/requests/properties/inventory-usage-form.yaml'
+              $ref: "./components/requests/properties/inventory-usage-original-data.yaml"
+            $ref: "./components/requests/properties/inventory-usage-form.yaml"
             items:
               type: array
               items:
                 type: object
-                requred:
+                required:
                   - item_id
                   - chart_of_account_id
                   - quantity
@@ -28,11 +28,11 @@ post:
                   - converter
                   - allocation_id
                 properties:
-                  $ref: './components/requests/properties/inventory-usage-item.yaml'
+                  $ref: "./components/requests/properties/inventory-usage-item.yaml"
           example:
             originalData:
-              increment_group: '202210'
-              date: '2022-10-07 13:51:46'
+              increment_group: "202210"
+              date: "2022-10-07 13:51:46"
               warehouse_id: null
               warehouse_name: null
               employee_id: null
@@ -46,12 +46,12 @@ post:
                   item_name: kopi janji manis
                   item_label: kopi janji manis
                   chart_of_account_id: 123
-                  chart_of_account_name: '[51107] ADMINISTRASI BANK'
+                  chart_of_account_name: "[51107] ADMINISTRASI BANK"
                   require_expiry_date: 0
                   require_production_number: 0
                   unit: PCS
                   converter: 1
-                  quantity: '2'
+                  quantity: "2"
                   allocation_id: 1
                   allocation_name: promosi
                   notes: null
@@ -65,8 +65,8 @@ post:
                       item_id: 7
                       created_by: 1
                       updated_by: 1
-                      created_at: '2022-09-30 09:03:42'
-                      updated_at: '2022-09-30 09:03:42'
+                      created_at: "2022-09-30 09:03:42"
+                      updated_at: "2022-09-30 09:03:42"
                       prices: []
                     - id: 8
                       label: box
@@ -76,8 +76,8 @@ post:
                       item_id: 7
                       created_by: 1
                       updated_by: 1
-                      created_at: '2022-09-30 09:03:42'
-                      updated_at: '2022-09-30 09:03:42'
+                      created_at: "2022-09-30 09:03:42"
+                      updated_at: "2022-09-30 09:03:42"
                       prices: []
                   item:
                     index: 0
@@ -98,8 +98,8 @@ post:
                         item_id: 7
                         created_by: 1
                         updated_by: 1
-                        created_at: '2022-09-30 09:03:42'
-                        updated_at: '2022-09-30 09:03:42'
+                        created_at: "2022-09-30 09:03:42"
+                        updated_at: "2022-09-30 09:03:42"
                         prices: []
                       - id: 8
                         label: box
@@ -109,8 +109,8 @@ post:
                         item_id: 7
                         created_by: 1
                         updated_by: 1
-                        created_at: '2022-09-30 09:03:42'
-                        updated_at: '2022-09-30 09:03:42'
+                        created_at: "2022-09-30 09:03:42"
+                        updated_at: "2022-09-30 09:03:42"
                         prices: []
                     unit:
                       id: 7
@@ -121,11 +121,11 @@ post:
                       item_id: 7
                       created_by: 1
                       updated_by: 1
-                      created_at: '2022-09-30 09:03:42'
-                      updated_at: '2022-09-30 09:03:42'
+                      created_at: "2022-09-30 09:03:42"
+                      updated_at: "2022-09-30 09:03:42"
                       prices: []
-            increment_group: '202210'
-            date: '2022-10-07 13:51:46'
+            increment_group: "202210"
+            date: "2022-10-07 13:51:46"
             warehouse_id: 1
             warehouse_name: CENTRAL WAREHOUSE
             employee_id: 1
@@ -139,12 +139,12 @@ post:
                 item_name: kopi janji manis
                 item_label: kopi janji manis
                 chart_of_account_id: 123
-                chart_of_account_name: '[51107] ADMINISTRASI BANK'
+                chart_of_account_name: "[51107] ADMINISTRASI BANK"
                 require_expiry_date: 0
                 require_production_number: 0
                 unit: PCS
                 converter: 1
-                quantity: '2'
+                quantity: "2"
                 allocation_id: 1
                 allocation_name: promosi
                 notes: null
@@ -158,8 +158,8 @@ post:
                     item_id: 7
                     created_by: 1
                     updated_by: 1
-                    created_at: '2022-09-30 09:03:42'
-                    updated_at: '2022-09-30 09:03:42'
+                    created_at: "2022-09-30 09:03:42"
+                    updated_at: "2022-09-30 09:03:42"
                     prices: []
                   - id: 8
                     label: box
@@ -169,8 +169,8 @@ post:
                     item_id: 7
                     created_by: 1
                     updated_by: 1
-                    created_at: '2022-09-30 09:03:42'
-                    updated_at: '2022-09-30 09:03:42'
+                    created_at: "2022-09-30 09:03:42"
+                    updated_at: "2022-09-30 09:03:42"
                     prices: []
                 item:
                   index: 0
@@ -191,8 +191,8 @@ post:
                       item_id: 7
                       created_by: 1
                       updated_by: 1
-                      created_at: '2022-09-30 09:03:42'
-                      updated_at: '2022-09-30 09:03:42'
+                      created_at: "2022-09-30 09:03:42"
+                      updated_at: "2022-09-30 09:03:42"
                       prices: []
                     - id: 8
                       label: box
@@ -202,8 +202,8 @@ post:
                       item_id: 7
                       created_by: 1
                       updated_by: 1
-                      created_at: '2022-09-30 09:03:42'
-                      updated_at: '2022-09-30 09:03:42'
+                      created_at: "2022-09-30 09:03:42"
+                      updated_at: "2022-09-30 09:03:42"
                       prices: []
                   unit:
                     id: 7
@@ -214,20 +214,20 @@ post:
                     item_id: 7
                     created_by: 1
                     updated_by: 1
-                    created_at: '2022-09-30 09:03:42'
-                    updated_at: '2022-09-30 09:03:42'
+                    created_at: "2022-09-30 09:03:42"
+                    updated_at: "2022-09-30 09:03:42"
                     prices: []
             errors:
               errors: {}
   responses:
-    '201':
+    "201":
       description: Created
       content:
         application/json:
           schema:
             type: object
             properties:
-              $ref: './components/responses/properties/inventory-usages.yaml'
+              $ref: "./components/responses/properties/inventory-usages.yaml"
           example:
             data:
               warehouse_id: 1
@@ -244,14 +244,14 @@ post:
                 created_by: null
                 updated_by: null
                 archived_by: null
-                created_at: '2022-09-26 08:14:40'
-                updated_at: '2022-09-26 08:14:40'
+                created_at: "2022-09-26 08:14:40"
+                updated_at: "2022-09-26 08:14:40"
                 archived_at: null
                 label: CENTRAL WAREHOUSE
               form:
                 id: 39
                 branch_id: 1
-                date: '2022-10-07 13:51:46'
+                date: "2022-10-07 13:51:46"
                 number: IU22100008
                 edited_number: null
                 edited_notes: null
@@ -271,8 +271,8 @@ post:
                   address: null
                   phone: null
                   email: rockydocky007@yahoo.com
-                  created_at: '2022-09-26 08:14:36'
-                  updated_at: '2022-09-26 08:14:36'
+                  created_at: "2022-09-26 08:14:36"
+                  updated_at: "2022-09-26 08:14:36"
                   branch_id: null
                   warehouse_id: null
                   full_name: admin admin
@@ -288,8 +288,8 @@ post:
                 cancellation_approval_by: null
                 cancellation_approval_reason: null
                 cancellation_status: null
-                created_at: '2022-10-07 13:52:49'
-                updated_at: '2022-10-07 13:52:49'
+                created_at: "2022-10-07 13:52:49"
+                updated_at: "2022-10-07 13:52:49"
                 request_close_to: null
                 request_close_by: null
                 request_close_at: null
@@ -306,7 +306,7 @@ post:
                   allocation_id: 1
                   chart_of_account_id: 123
                   quantity: 2
-                  expiry_date: '2022-10-07 13:52:49'
+                  expiry_date: "2022-10-07 13:52:49"
                   production_number: null
                   unit: PCS
                   converter: 1
@@ -320,8 +320,8 @@ post:
                     created_by: 1
                     updated_by: 1
                     archived_by: null
-                    created_at: '2022-09-27 08:53:50'
-                    updated_at: '2022-09-27 08:53:50'
+                    created_at: "2022-09-27 08:53:50"
+                    updated_at: "2022-09-27 08:53:50"
                     archived_at: null
                     label: promosi
 get:
@@ -343,7 +343,7 @@ get:
       in: query
       schema:
         type: string
-      example: '-form.number'
+      example: "-form.number"
     - name: filter_form
       in: query
       schema:
@@ -353,7 +353,7 @@ get:
       in: query
       schema:
         type: string
-      example: '{}'
+      example: "{}"
     - name: filter_date_min
       in: query
       schema:
@@ -368,7 +368,7 @@ get:
       in: query
       schema:
         type: integer
-      example: '10'
+      example: "10"
     - name: includes
       in: query
       schema:
@@ -378,9 +378,9 @@ get:
       in: query
       schema:
         type: integer
-      example: '1'
+      example: "1"
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
@@ -392,7 +392,7 @@ get:
               links:
                 $ref: ./components/responses/properties/links.yaml
               data:
-                $ref: ./components/responses/properties/inventory-usages.yaml            
+                $ref: ./components/responses/properties/inventory-usages.yaml
           example:
             data:
               - id: 45
@@ -401,7 +401,7 @@ get:
                 form:
                   id: 37
                   branch_id: 1
-                  date: '2022-10-04 22:42:48'
+                  date: "2022-10-04 22:42:48"
                   number: IU22100006
                   edited_number: null
                   edited_notes: null
@@ -426,8 +426,8 @@ get:
                   cancellation_approval_by: null
                   cancellation_approval_reason: null
                   cancellation_status: null
-                  created_at: '2022-10-04 22:42:09'
-                  updated_at: '2022-10-04 22:42:09'
+                  created_at: "2022-10-04 22:42:09"
+                  updated_at: "2022-10-04 22:42:09"
                   request_close_to: null
                   request_close_by: null
                   request_close_at: null
@@ -448,8 +448,8 @@ get:
                   created_by: null
                   updated_by: null
                   archived_by: null
-                  created_at: '2022-09-26 08:14:40'
-                  updated_at: '2022-09-26 08:14:40'
+                  created_at: "2022-09-26 08:14:40"
+                  updated_at: "2022-09-26 08:14:40"
                   archived_at: null
                   label: CENTRAL WAREHOUSE
                 items:
@@ -459,7 +459,7 @@ get:
                     allocation_id: 1
                     chart_of_account_id: 128
                     quantity: 11
-                    expiry_date: '2022-10-07 13:49:37'
+                    expiry_date: "2022-10-07 13:49:37"
                     production_number: null
                     unit: PCS
                     converter: 1
@@ -485,8 +485,8 @@ get:
                       created_by: 1
                       updated_by: 1
                       archived_by: null
-                      created_at: '2022-09-30 09:03:42'
-                      updated_at: '2022-10-03 12:14:15'
+                      created_at: "2022-09-30 09:03:42"
+                      updated_at: "2022-10-03 12:14:15"
                       archived_at: null
                       label: kopi janji manis
                   - id: 20
@@ -495,7 +495,7 @@ get:
                     allocation_id: 1
                     chart_of_account_id: 124
                     quantity: 12
-                    expiry_date: '2022-10-07 13:49:37'
+                    expiry_date: "2022-10-07 13:49:37"
                     production_number: null
                     unit: PCS
                     converter: 1
@@ -521,8 +521,8 @@ get:
                       created_by: 1
                       updated_by: 1
                       archived_by: null
-                      created_at: '2022-09-30 09:03:42'
-                      updated_at: '2022-10-03 12:14:15'
+                      created_at: "2022-09-30 09:03:42"
+                      updated_at: "2022-10-03 12:14:15"
                       archived_at: null
                       label: kopi janji manis
             links:
@@ -535,6 +535,6 @@ get:
               from: 1
               last_page: 1
               path: https://project-cendekia.site/api/v1/inventory/usages
-              per_page: '10'
+              per_page: "10"
               to: 6
               total: 6

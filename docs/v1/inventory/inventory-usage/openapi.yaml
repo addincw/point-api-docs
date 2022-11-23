@@ -11,5 +11,7 @@ paths:
     $ref: paths/inventory_usages_47_reject.yaml
   /inventory/usages:
     $ref: paths/inventory_usages.yaml
+  /api/v1/inventory/usages/169:
+    $ref: paths/inventory_usages_169.yaml
   /inventory/usages/43/histories:
     $ref: paths/inventory_usages_43_histories.yaml
